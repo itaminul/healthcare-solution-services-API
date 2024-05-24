@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  nest-app:
+    build: .
+    container_name: health-care-api
+    restart: always
+    ports:
+      - 9004:9004
+    networks:
+      - mynetwork  
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:15
+    container_name: postgresprisma
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - mynetwork
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # persist data even if container shuts down
+      - ./init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh # for creating an additional shadow database
+
+volumes:
+  postgres_data:
+
+networks:
+  mynetwork:
+    name: mynetwork
