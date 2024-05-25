@@ -6,7 +6,7 @@ services:
     container_name: health-care-api
     restart: always
     ports:
-      - 9004:9004
+      - 10001:10001
     networks:
       - mynetwork  
     depends_on:
@@ -19,10 +19,10 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: postgresprisma
+    container_name: postgresprismahealth
     restart: always
     ports:
-      - 5434:5432
+      - 5480:5432
     networks:
       - mynetwork
     env_file:
