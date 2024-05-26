@@ -844,8 +844,8 @@ model DoctorInformation {
   emergencyMobile          String?
   officeEmail              String?
   personalEmail            String?
-  empImage                 String?
-  empSignature             String?
+  doctorImage                 String?
+  doctorSignature             String?
   designationId            Int?
   dateOfBirts              String?
   maritialStatus           Boolean?
