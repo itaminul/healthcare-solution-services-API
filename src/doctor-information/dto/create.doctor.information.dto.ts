@@ -1,0 +1,75 @@
+import { Injectable } from "@nestjs/common";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+
+@Injectable()
+export class CreateDoctorInformationDto {
+  @IsString()
+  @IsOptional()
+  firstName;
+  @IsString()
+  @IsNotEmpty()
+  middleName;
+  @IsString()
+  @IsNotEmpty()
+  lastName;
+  @IsString()
+  @IsNotEmpty()
+  fullName;
+  @IsString()
+  @IsOptional()
+  phone;
+  @IsString()
+  @IsOptional()
+  mobileOne;
+  @IsString()
+  @IsOptional()
+  mobileTwo;
+  @IsString()
+  @IsOptional()
+  emergencyMobile;
+  @IsString()
+  @IsOptional()
+  officeEmail;
+  @IsString()
+  @IsOptional()
+  personalEmail;
+  @IsString()
+  @IsOptional()
+  doctorImage;
+  @IsString()
+  @IsOptional()
+  doctorSignature;
+  @IsString()
+  @IsOptional()
+  designationId;
+  @IsString()
+  @IsOptional()
+  dateOfBirts;
+  @IsString()
+  @IsOptional()
+  maritialStatus;
+  @IsString()
+  @IsOptional()
+  spousName;
+  @IsString()
+  @IsOptional()
+  spouseProfe;
+  @IsString()
+  @IsOptional()
+  fatherOrHusbandName;
+  @IsString()
+  @IsOptional()
+  fatherOrHusbandProfe;
+  @IsString()
+  @IsOptional()
+  fatherOrHusbandMobile;
+  @IsString()
+  @IsOptional()
+  motherName;
+  @IsString()
+  @IsOptional()
+  motherProfe;
+  @IsString()
+  @IsOptional()
+  motherMobile;
+}
