@@ -26,7 +26,7 @@ export class DoctorInformationController {
         results,
       };
     } catch (error) {
-      return { success: false, message: error.message };
+      throw error;
     }
   }
 
@@ -40,7 +40,7 @@ export class DoctorInformationController {
         results,
       };
     } catch (error) {
-      return { success: false, message: error.message };
+      throw error;
     }
   }
   @Patch(":id")
@@ -56,7 +56,7 @@ export class DoctorInformationController {
         results,
       };
     } catch (error) {
-      return { success: false, message: error.message };
+      throw error;
     }
   }
 }
