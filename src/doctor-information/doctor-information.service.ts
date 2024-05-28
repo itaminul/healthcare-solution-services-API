@@ -37,33 +37,38 @@ export class DoctorInformationService {
       motherProfe,
       motherMobile,
     } = dto;
-    return await this.prismaService.doctorInformation.create({
-      data: {
-        firstName,
-        middleName,
-        lastName,
-        fullName,
-        phone,
-        mobileOne,
-        mobileTwo,
-        emergencyMobile,
-        officeEmail,
-        personalEmail,
-        doctorImage,
-        doctorSignature,
-        designationId,
-        dateOfBirts,
-        maritialStatus,
-        spousName,
-        spouseProfe,
-        fatherOrHusbandName,
-        fatherOrHusbandProfe,
-        fatherOrHusbandMobile,
-        motherName,
-        motherProfe,
-        motherMobile,
-      },
-    });
+    try {
+      const doctors = await this.prismaService.doctorInformation.create({
+        data: {
+          firstName,
+          middleName,
+          lastName,
+          fullName,
+          phone,
+          mobileOne,
+          mobileTwo,
+          emergencyMobile,
+          officeEmail,
+          personalEmail,
+          doctorImage,
+          doctorSignature,
+          designationId,
+          dateOfBirts,
+          maritialStatus,
+          spousName,
+          spouseProfe,
+          fatherOrHusbandName,
+          fatherOrHusbandProfe,
+          fatherOrHusbandMobile,
+          motherName,
+          motherProfe,
+          motherMobile,
+        },
+      });
+      return { message: "Patients created successfully", doctors };
+    } catch (error) {
+      throw error;
+    }
   }
 
   async update(@Param() id: number, @Body() dto: UpdateDoctorInformationDto) {
@@ -93,36 +98,42 @@ export class DoctorInformationService {
       motherMobile,
       activeStatus,
     } = dto;
-    return await this.prismaService.doctorInformation.update({
-      where: {
-        id: Number(id),
-      },
-      data: {
-        firstName,
-        middleName,
-        lastName,
-        fullName,
-        phone,
-        mobileOne,
-        mobileTwo,
-        emergencyMobile,
-        officeEmail,
-        personalEmail,
-        doctorImage,
-        doctorSignature,
-        designationId,
-        dateOfBirts,
-        maritialStatus,
-        spousName,
-        spouseProfe,
-        fatherOrHusbandName,
-        fatherOrHusbandProfe,
-        fatherOrHusbandMobile,
-        motherName,
-        motherProfe,
-        motherMobile,
-        activeStatus,
-      },
-    });
+    try {
+      const doctors = await this.prismaService.doctorInformation.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          firstName,
+          middleName,
+          lastName,
+          fullName,
+          phone,
+          mobileOne,
+          mobileTwo,
+          emergencyMobile,
+          officeEmail,
+          personalEmail,
+          doctorImage,
+          doctorSignature,
+          designationId,
+          dateOfBirts,
+          maritialStatus,
+          spousName,
+          spouseProfe,
+          fatherOrHusbandName,
+          fatherOrHusbandProfe,
+          fatherOrHusbandMobile,
+          motherName,
+          motherProfe,
+          motherMobile,
+          activeStatus,
+        },
+      });
+
+      return { message: "Patients created successfully", doctors };
+    } catch (error) {
+      throw error;
+    }
   }
 }
