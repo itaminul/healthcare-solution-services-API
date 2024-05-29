@@ -143,7 +143,7 @@ export class DoctorInformationService {
         },
       });
 
-      return { message: "Patients created successfully", doctors };
+      return { message: "Patients updated successfully", doctors };
     } catch (error) {
       throw error;
     }
