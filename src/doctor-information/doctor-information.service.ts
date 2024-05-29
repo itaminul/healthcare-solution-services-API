@@ -1,14 +1,26 @@
-import { Body, Injectable, Param } from "@nestjs/common";
+import { Cache } from "@nestjs/cache-manager";
+import { Body, Inject, Injectable, Param } from "@nestjs/common";
 import { PrismaService } from "src/prisma-service/prisma.service";
 import { CreateDoctorInformationDto } from "./dto/create.doctor.information.dto";
 import { UpdateDoctorInformationDto } from "./dto/update.doctor.information.dto";
 
 @Injectable()
 export class DoctorInformationService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject("CACHE_MANAGER") private cacheManager: Cache,
+    private readonly prismaService: PrismaService
+  ) {}
 
   async getAll() {
-    return await this.prismaService.doctorInformation.findMany();
+    const doctors = await this.prismaService.doctorInformation.findMany();
+    try {
+      if (doctors && doctors.length > 0) {
+        await this.cacheManager.set("doctors", doctors);
+        return await this.cacheManager.get("doctors");
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   async create(@Body() dto: CreateDoctorInformationDto) {
