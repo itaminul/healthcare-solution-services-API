@@ -12,26 +12,30 @@ export class AuthService {
     const user = await this.prismaService.users.findUnique({
       where: { username },
     });
-    if (user && bcrypt.compareSync(password, user.password)) {
+    if (user && (await bcrypt.compare(password, user.password))) {
       const { password, ...result } = user;
       return result;
     }
     return null;
   }
   async login(user: any) {
-    const payload = { 
-      username: user.username, sub: user.id, role: user.roleId
+    const payload = {
+      username: user.username,
+      sub: user.id,
+      role: user.roleId,
     };
     return {
-      access_token: this.jwtService.sign(payload)
-    }
+      access_token: this.jwtService.sign(payload),
+    };
   }
-  async register(username: string, password: string) {
-    const hashPassword = bcrypt.hashSync(password, 10);
+  async register(username: string, password: string, roleId: number) {
+    const saltRounds = 10;
+    const hashPassword = await bcrypt.hash(password, saltRounds);
     return this.prismaService.users.create({
       data: {
         username,
         password: hashPassword,
+        roleId,
       },
     });
   }
