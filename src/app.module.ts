@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { DoctorInformationModule } from "./doctor-information/doctor-information.module";
 import { PrismaModule } from "./prisma-service/prisma.module";
 import { ConfigModule } from "@nestjs/config";
 import { CacheModule } from "@nestjs/cache-manager";
 import { redisStore } from "cache-manager-redis-yet";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,8 +26,9 @@ import { redisStore } from "cache-manager-redis-yet";
     }),
     DoctorInformationModule,
     PrismaModule,
+    AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}
