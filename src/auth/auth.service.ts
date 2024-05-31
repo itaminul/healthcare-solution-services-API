@@ -18,6 +18,14 @@ export class AuthService {
     }
     return null;
   }
+  async login(user: any) {
+    const payload = { 
+      username: user.username, sub: user.id, role: user.roleId
+    };
+    return {
+      access_token: this.jwtService.sign(payload)
+    }
+  }
   async register(username: string, password: string) {
     const hashPassword = bcrypt.hashSync(password, 10);
     return this.prismaService.users.create({

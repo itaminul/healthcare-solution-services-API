@@ -1,11 +1,12 @@
 import { Module } from "@nestjs/common";
-import { AppService } from "./app.service";
 import { DoctorInformationModule } from "./doctor-information/doctor-information.module";
 import { PrismaModule } from "./prisma-service/prisma.module";
 import { ConfigModule } from "@nestjs/config";
 import { CacheModule } from "@nestjs/cache-manager";
 import { redisStore } from "cache-manager-redis-yet";
 import { AuthModule } from './auth/auth.module';
+import { PrismaService } from "./prisma-service/prisma.service";
+import { JwtService } from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -29,6 +30,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [],
-  providers: [AppService],
+  providers: [PrismaService, JwtService],
 })
 export class AppModule {}
