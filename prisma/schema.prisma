@@ -883,3 +883,20 @@ model DoctorInformation {
   EmployeePermanentAddress EmployeePermanentAddress[]
   EmployeePresentAddress   EmployeePresentAddress[]
 }
+
+model HealthServiceType {
+  id                       Int                        @id @default(autoincrement())
+  typeName                String
+  typeDescription String?
+  orgId                    Int?
+  serialNo                 Int?
+  activeStatus             Boolean                    @default(true)
+  createdDate              String?
+  createdTime              String?
+  createdBy                Int?
+  createdAt                DateTime                   @default(now())
+  updatedDate              String?
+  updatedTime              String?
+  updatedAt                DateTime?
+  updatedBy                Int?
+}
