@@ -7,6 +7,7 @@ import { redisStore } from "cache-manager-redis-yet";
 import { AuthModule } from './auth/auth.module';
 import { PrismaService } from "./prisma-service/prisma.service";
 import { JwtService } from "@nestjs/jwt";
+import { HealthServiceTypeModule } from './health-service-type/health-service-type.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { JwtService } from "@nestjs/jwt";
     DoctorInformationModule,
     PrismaModule,
     AuthModule,
+    HealthServiceTypeModule,
   ],
   controllers: [],
   providers: [PrismaService, JwtService],
