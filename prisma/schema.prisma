@@ -828,8 +828,22 @@ model Users {
   updatedDate  String?
   updatedTime  String?
   updatedAt    DateTime?
+  userRole UserRole[]
 }
 
+model Role {
+  id    Int       @id @default(autoincrement())
+  name  String    @unique
+  users UserRole[]
+}
+
+model UserRole {
+  id     Int   @id @default(autoincrement())
+  userId Int
+  roleId Int
+  users   Users  @relation(fields: [userId], references: [id])
+  role   Role  @relation(fields: [roleId], references: [id])
+}
 
 model DoctorInformation {
   id                       Int                        @id @default(autoincrement())

@@ -18,16 +18,18 @@ export class AuthService {
     }
     return null;
   }
+
   async login(user: any) {
     const payload = {
-      username: user.username,
+      username: user.email,
       sub: user.id,
-      role: user.roleId,
+      roles: user.roles.map((role) => role.role.name),
     };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
+
   async register(username: string, password: string, roleId: number) {
     const saltRounds = 10;
     const hashPassword = await bcrypt.hash(password, saltRounds);

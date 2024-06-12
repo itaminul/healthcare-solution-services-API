@@ -1,5 +1,16 @@
-import { Body, Controller, HttpStatus, Post, Request } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from "@nestjs/common";
 import { AuthService } from "./auth.service";
+import { JwtAuthGuard } from "./strategies/jwt-auth.guard";
+import { RolesGuard } from "src/role/roles.guard";
+import { Roles } from "src/role/roles.decorator";
 
 @Controller("auth")
 export class AuthController {
@@ -23,7 +34,7 @@ export class AuthController {
     }
   }
 
-  @Post(":login")
+  @Post("login")
   async login(@Request() req) {
     try {
       const results = await this.authService.login(req.user);
@@ -35,5 +46,12 @@ export class AuthController {
     } catch (error) {
       throw error;
     }
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles("admin")
+  @Get("profile")
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
