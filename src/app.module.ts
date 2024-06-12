@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaService } from "./prisma-service/prisma.service";
 import { JwtService } from "@nestjs/jwt";
 import { HealthServiceTypeModule } from './health-service-type/health-service-type.module';
+import { UserModule } from './user/user.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { HealthServiceTypeModule } from './health-service-type/health-service-ty
     PrismaModule,
     AuthModule,
     HealthServiceTypeModule,
+    UserModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [PrismaService, JwtService],
