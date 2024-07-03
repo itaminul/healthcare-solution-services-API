@@ -98,8 +98,8 @@ export class AuthController {
     });
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles("admin")
+  @UseGuards(JwtAuthGuard)
+  // @Roles("admin")
   @Get("profile")
   getProfile(@Request() req) {
     return req.user;
